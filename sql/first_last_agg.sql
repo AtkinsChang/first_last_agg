@@ -11,11 +11,15 @@ LANGUAGE C IMMUTABLE STRICT;
 DROP AGGREGATE IF EXISTS first(anyelement);
 CREATE AGGREGATE first(anyelement) (
     SFUNC = first_sfunc,
-    STYPE = anyelement
+    STYPE = anyelement,
+    COMBINEFUNC = first_sfunc,
+    PARALLEL = SAFE
 );
 
 DROP AGGREGATE IF EXISTS last(anyelement);
 CREATE AGGREGATE last(anyelement) (
     SFUNC = last_sfunc,
-    STYPE = anyelement
+    STYPE = anyelement,
+    COMBINEFUNC = last_sfunc,
+    PARALLEL = SAFE
 );
